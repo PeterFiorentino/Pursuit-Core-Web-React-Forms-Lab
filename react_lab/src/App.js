@@ -8,9 +8,8 @@ class App extends React.Component {
     super();
     this.state = {
       array: "",
-      selectIndex: 0,
+      selectValue: "sum",
       value: "",
-      submittable: ""
     }
   }
 
@@ -22,7 +21,7 @@ class App extends React.Component {
   handleSelectBox = (event) => {
     // console.log(event.target.selectedIndex);
     this.setState({
-      selectIndex : event.target.selectedIndex
+      selectValue : event.target.value
     })
     console.log(this.state.selectIndex)
   }
@@ -32,7 +31,7 @@ class App extends React.Component {
 
     
 
-    if(this.state.selectIndex === 0) {
+    if(this.state.selectValue === "sum") {
       let sum = 0;
       for(let i of this.state.array) {
         sum += Number(i)
@@ -40,7 +39,7 @@ class App extends React.Component {
       this.setState({
         value: sum
       })
-    } else if(this.state.selectIndex === 1) {
+    } else if(this.state.selectValue === "average") {
       let average = 0;
       let sum = 0;
       for (let i of this.state.array) {
@@ -50,7 +49,8 @@ class App extends React.Component {
       this.setState({
         value: average
       })
-    } else if(this.state.selectIndex === 2) {
+    } else if(this.state.selectValue === "mode") {
+      console.log("peter")
       let obj = {};
       let mostFrequentNumber = 0;
       for(let i of this.state.array) {
@@ -62,6 +62,7 @@ class App extends React.Component {
       }
       for (let key in obj) {
           if (obj[key] > mostFrequentNumber) {
+            console.log("hello")
             mostFrequentNumber = key
           }
       }
@@ -105,9 +106,9 @@ class App extends React.Component {
           <h3>Enter each number in the array, separated by a comma</h3>
           <input type="text" placeholder="Enter numbers" value={this.state.array} onChange={this.handleTextbox}></input>
           <select onChange={this.handleSelectBox}>
-            <option>Sum</option>
-            <option>Average</option>
-            <option>Mode</option>
+            <option value="sum">Sum</option>
+            <option value="average">Average</option>
+            <option value="mode">Mode</option>
           </select>
           <button onClick={this.doMath}>Calculate</button>
         </form>
