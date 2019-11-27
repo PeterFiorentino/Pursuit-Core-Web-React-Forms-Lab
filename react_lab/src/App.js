@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       array: "",
       selectIndex: 0,
-      value: ""
+      value: "",
+      submittable: ""
     }
   }
 
@@ -28,6 +29,9 @@ class App extends React.Component {
 
   doMath = (event) => {
     event.preventDefault();
+
+    
+
     if(this.state.selectIndex === 0) {
       let sum = 0;
       for(let i of this.state.array) {
@@ -65,6 +69,15 @@ class App extends React.Component {
         value: mostFrequentNumber
       })
     }
+    for(let i of this.state.array) {
+      console.log("hi")
+      if (isNaN(Number(i))) {
+        console.log("not a num")
+        this.setState({
+          value:"Your entry needs to be numbers"
+        })
+      }
+    }
   }
 
   handleTextbox = (event) => {
@@ -101,7 +114,7 @@ class App extends React.Component {
         <h1>{this.state.value}</h1>
       </div>
     );
-    }
+  }
 }
 
 export default App;
